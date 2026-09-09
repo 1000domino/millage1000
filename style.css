@@ -1,0 +1,1303 @@
+/* ========================================
+   BASE
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  background: #f2f2f2;
+  color: #ff5600;
+
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* ========================================
+   COLORS
+========================================= */
+
+:root {
+  --orange: #ff5600;
+  --gray: #f2f2f2;
+  --gray-dark: #777;
+  --marker: #e5e5e5;
+  --blue: #69bfff;
+  --blue-light: #cceeff;
+}
+
+
+/* ========================================
+   HEADER
+========================================= */
+
+.header {
+  height: 72px;
+
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--orange);
+  color: white;
+
+  border-bottom: 2px solid var(--orange);
+}
+
+.header-copy {
+  margin: 0;
+
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+}
+
+
+/* Windowsっぽいボタン */
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.window-controls span {
+  width: 40px;
+  height: 40px;
+
+  display: grid;
+  place-items: center;
+
+  background: #eee;
+  color: #111;
+
+  border: 2px solid #444;
+
+  font-family: Arial, sans-serif;
+  font-size: 28px;
+  line-height: 1;
+}
+
+
+/* ========================================
+   MAIN
+========================================= */
+
+.main {
+  min-height: calc(100vh - 72px);
+
+  display: grid;
+  grid-template-columns: 34% 66%;
+}
+
+
+/* ========================================
+   DOT BACKGROUND
+========================================= */
+
+.dot-bg {
+  background-color: var(--gray);
+
+  background-image:
+    radial-gradient(
+      circle,
+      var(--orange) 1.5px,
+      transparent 1.7px
+    );
+
+  background-size: 32px 32px;
+}
+
+
+/* ========================================
+   TITLE AREA
+========================================= */
+
+.title-area {
+  min-height: 900px;
+
+  position: relative;
+
+  padding: 70px 40px;
+
+  border-right: 1px solid #ddd;
+
+  overflow: hidden;
+}
+
+
+/* 縦英字 */
+
+.english-copy {
+  position: absolute;
+
+  top: 100px;
+  left: 70px;
+
+  margin: 0;
+
+  padding: 18px 9px;
+
+  background: var(--orange);
+  color: white;
+
+  writing-mode: vertical-rl;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  letter-spacing: 0.4em;
+}
+
+
+/* タイトル */
+
+.title-group {
+  position: absolute;
+
+  top: 110px;
+  left: 145px;
+
+  display: flex;
+  gap: 25px;
+
+  writing-mode: vertical-rl;
+}
+
+.sub-title {
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: bold;
+
+  letter-spacing: 0.18em;
+}
+
+.site-title {
+  margin: 0;
+
+  font-size: clamp(48px, 6vw, 92px);
+  font-weight: normal;
+
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+}
+
+
+/* ========================================
+   DECORATIONS
+========================================= */
+
+.decoration {
+  position: absolute;
+
+  user-select: none;
+  pointer-events: none;
+}
+
+.star {
+  line-height: 1;
+}
+
+.star-01 {
+  top: 55px;
+  right: 30px;
+
+  font-size: 130px;
+  font-weight: normal;
+}
+
+.star-02 {
+  bottom: 160px;
+  left: 60px;
+
+  font-size: 90px;
+}
+
+.cross {
+  bottom: 90px;
+  right: 60px;
+
+  font-size: 90px;
+}
+
+.diamond {
+  top: 390px;
+  left: 35px;
+
+  font-size: 50px;
+}
+
+
+/* ========================================
+   CONTENT AREA
+========================================= */
+
+.content-area {
+  position: relative;
+
+  min-height: 900px;
+
+  padding:
+    60px
+    clamp(30px, 7vw, 120px)
+    420px;
+
+  background: var(--gray);
+
+  overflow: hidden;
+}
+
+
+/* ========================================
+   WARNING WINDOW
+========================================= */
+
+.warning-window {
+  width: min(680px, 100%);
+
+  border: 2px solid var(--orange);
+
+  background: rgba(242, 242, 242, 0.94);
+
+  box-shadow:
+    5px 5px 0 rgba(255, 86, 0, 0.25);
+}
+
+.window-title {
+  height: 34px;
+
+  padding-left: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 2px solid var(--orange);
+
+  font-weight: bold;
+}
+
+.mini-controls {
+  height: 100%;
+
+  display: flex;
+}
+
+.mini-controls span {
+  width: 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-left: 1px solid var(--orange);
+}
+
+.warning-content {
+  padding: 18px 20px;
+
+  color: #222;
+
+  line-height: 1.8;
+}
+
+
+/* ========================================
+   TEXT MARKERS
+========================================= */
+
+.gray-marker {
+  padding: 2px 5px;
+
+  background: var(--marker);
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.orange-marker {
+  padding: 3px 7px;
+
+  background: var(--orange);
+  color: white;
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+
+/* ========================================
+   STORY COPY
+========================================= */
+
+.story-copy {
+  width: min(600px, 100%);
+
+  margin-top: 40px;
+
+  font-size: 17px;
+  font-weight: bold;
+  line-height: 1.8;
+}
+
+.story-copy p {
+  margin: 0 0 28px;
+}
+
+.story-copy span {
+  padding: 2px 5px;
+
+  background: rgba(225, 225, 225, 0.75);
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.dotted-line {
+  width: 75%;
+
+  margin: 8px 0 25px;
+
+  border-top: 2px dotted var(--orange);
+}
+
+
+/* ========================================
+   FACTION
+========================================= */
+
+.faction-area {
+  position: relative;
+  z-index: 5;
+
+  margin-top: 70px;
+
+  display: flex;
+  gap: 35px;
+}
+
+.faction-window {
+  width: 310px;
+
+  display: block;
+
+  background: var(--gray);
+
+  border: 2px solid currentColor;
+
+  box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.1s linear,
+    box-shadow 0.1s linear;
+}
+
+.faction-window:hover {
+  transform: translate(3px, 3px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.12);
+}
+
+
+/* タイトルバー */
+
+.faction-titlebar {
+  padding: 4px 10px;
+
+  border-bottom: 2px solid currentColor;
+
+  font-size: 14px;
+}
+
+
+/* 中 */
+
+.faction-content {
+  min-height: 100px;
+
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 20px;
+}
+
+.faction-content strong {
+  font-size: 24px;
+}
+
+
+/* オレンジ派 */
+
+.faction-orange {
+  color: var(--orange);
+}
+
+
+/* グレー派 */
+
+.faction-gray {
+  color: #555;
+}
+
+
+/* ========================================
+   SEA
+========================================= */
+
+.sea {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 380px;
+
+  pointer-events: none;
+}
+
+
+/*
+ * ここは最終的には海・雲の透過PNGなどに
+ * 差し替える前提。
+ * 今はCSSだけで仮の雰囲気を作る。
+ */
+
+.cloud {
+  position: absolute;
+
+  background: #ddd;
+
+  opacity: 0.65;
+
+  border-radius: 50%;
+}
+
+.cloud::before,
+.cloud::after {
+  content: "";
+
+  position: absolute;
+
+  background: inherit;
+  border-radius: inherit;
+}
+
+.cloud-01 {
+  width: 280px;
+  height: 110px;
+
+  right: 80px;
+  bottom: 150px;
+}
+
+.cloud-01::before {
+  width: 160px;
+  height: 160px;
+
+  left: 40px;
+  bottom: 10px;
+}
+
+.cloud-01::after {
+  width: 130px;
+  height: 130px;
+
+  right: 20px;
+  bottom: 5px;
+}
+
+
+.cloud-02 {
+  width: 240px;
+  height: 90px;
+
+  left: 80px;
+  bottom: 110px;
+}
+
+.cloud-02::before {
+  width: 130px;
+  height: 130px;
+
+  left: 30px;
+  bottom: 5px;
+}
+
+.cloud-02::after {
+  width: 100px;
+  height: 100px;
+
+  right: 20px;
+  bottom: 0;
+}
+
+
+/* 仮の波 */
+
+.wave {
+  position: absolute;
+
+  left: -10%;
+  width: 120%;
+
+  border-radius: 50% 50% 0 0;
+}
+
+.wave-01 {
+  height: 130px;
+  bottom: -20px;
+
+  background: var(--blue);
+}
+
+.wave-02 {
+  height: 110px;
+  bottom: -5px;
+
+  background: var(--blue-light);
+
+  transform: translateX(8%);
+  opacity: 0.8;
+}
+
+.wave-03 {
+  height: 70px;
+  bottom: 0;
+
+  background: #fff;
+
+  transform: translateX(-12%);
+  opacity: 0.45;
+}
+
+
+/* ========================================
+   FOOTER
+========================================= */
+
+.footer {
+  min-height: 70px;
+
+  padding: 0 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--orange);
+  color: white;
+}
+
+.footer nav {
+  display: flex;
+  gap: clamp(20px, 5vw, 70px);
+}
+
+.footer a {
+  font-family: monospace;
+
+  letter-spacing: 0.15em;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+/* ========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .header {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .header-copy {
+    font-size: 13px;
+  }
+
+  .window-controls span {
+    width: 30px;
+    height: 30px;
+
+    font-size: 20px;
+  }
+
+
+  .main {
+    display: block;
+  }
+
+
+  .title-area {
+    min-height: 520px;
+
+    border-right: 0;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .english-copy {
+    top: 55px;
+    left: 35px;
+  }
+
+  .title-group {
+    top: 60px;
+    left: 110px;
+  }
+
+  .site-title {
+    font-size: 52px;
+  }
+
+
+  .content-area {
+    min-height: 1000px;
+
+    padding:
+      35px
+      20px
+      400px;
+  }
+
+
+  .faction-area {
+    flex-direction: column;
+
+    gap: 20px;
+  }
+
+  .faction-window {
+    width: 100%;
+  }
+
+
+  .footer {
+    padding: 20px;
+
+    display: block;
+  }
+
+  .footer nav {
+    flex-wrap: wrap;
+
+    gap: 15px 25px;
+
+    margin-bottom: 20px;
+  }
+
+}
+
+.header {
+  height: 72px;
+  padding: 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--orange);
+  color: white;
+}
+
+.header-nav {
+  display: flex;
+  gap: 48px;
+}
+
+.header-nav a {
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+  letter-spacing: 0.18em;
+}
+
+.header-nav a:hover {
+  background: white;
+  color: var(--orange);
+}
+
+.footer {
+  min-height: 70px;
+  padding: 0 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: var(--orange);
+  color: white;
+}
+
+.footer-copy {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+}
+
+/* ========================================
+   追加調整
+   2000年代 / Windows風 / 白抜き文字 / 独自カーソル
+========================================= */
+
+
+/* ========================================
+   CUSTOM CURSOR
+========================================= */
+
+body {
+  cursor: url("img/cursor.png") 6 2, auto;
+}
+
+a,
+button {
+  cursor: url("img/cursor-pointer.png") 8 2, pointer;
+}
+
+
+/* ========================================
+   TITLE TEXT
+========================================= */
+
+/* タイトル全体 */
+
+.site-title {
+  display: flex;
+  gap: 12px;
+
+  writing-mode: vertical-rl;
+
+  line-height: 1;
+}
+
+
+/* 白抜き文字 */
+
+.outline-text {
+  color: var(--gray);
+
+  -webkit-text-stroke: 1.5px var(--orange);
+
+  font-weight: normal;
+}
+
+
+/* ベタ文字 */
+
+.solid-text {
+  color: var(--orange);
+}
+
+
+/* ========================================
+   WARNING WINDOW
+========================================= */
+
+.warning-window {
+  width: min(680px, 100%);
+
+  background: #f3f3f3;
+
+  border: 2px solid var(--orange);
+
+  box-shadow:
+    3px 3px 0 #cecece,
+    5px 5px 0 rgba(255, 86, 0, 0.18);
+
+  font-family:
+    "MS Gothic",
+    "ＭＳ ゴシック",
+    monospace;
+}
+
+
+/* タイトルバー */
+
+.window-title {
+  height: 34px;
+
+  padding-left: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-bottom: 2px solid var(--orange);
+
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff 0%,
+      #f6f6f6 40%,
+      #dedede 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    inset 0 -1px 0 #bdbdbd;
+
+  font-size: 14px;
+  font-weight: bold;
+
+  letter-spacing: 0.05em;
+}
+
+
+/* 右上ボタン */
+
+.mini-controls {
+  height: 100%;
+
+  display: flex;
+}
+
+.mini-controls span {
+  width: 32px;
+  height: 100%;
+
+  display: grid;
+  place-items: center;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #e8e8e8
+    );
+
+  color: #333;
+
+  border-left: 1px solid var(--orange);
+
+  box-shadow:
+    inset 1px 1px 0 #ffffff,
+    inset -1px -1px 0 #aaa;
+
+  font-family: Arial, sans-serif;
+}
+
+
+/* 本文部分 */
+
+.warning-content {
+  position: relative;
+
+  padding: 22px 20px;
+
+  color: #222;
+
+  line-height: 1.8;
+
+  background-color: #f2f2f2;
+
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.018) 25%,
+      transparent 25%
+    );
+
+  background-size: 4px 4px;
+}
+
+
+/* ========================================
+   MARKER TEXT
+========================================= */
+
+.gray-marker {
+  display: inline;
+
+  padding: 2px 5px;
+
+  background: #e3e3e3;
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 86, 0, 0.25);
+}
+
+
+.orange-marker {
+  display: inline;
+
+  padding: 3px 7px;
+
+  background: var(--orange);
+  color: white;
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+
+/* ========================================
+   STORY COPY
+========================================= */
+
+.story-copy span {
+  padding: 2px 5px;
+
+  background: rgba(225, 225, 225, 0.8);
+
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+
+/* ========================================
+   WINDOWS-STYLE FACTION BUTTONS
+========================================= */
+
+.faction-window {
+  background: #f3f3f3;
+
+  box-shadow:
+    3px 3px 0 rgba(0, 0, 0, 0.12);
+
+  transition:
+    transform 0.08s linear,
+    box-shadow 0.08s linear;
+}
+
+
+/* タイトルバー */
+
+.faction-titlebar {
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #e8e8e8
+    );
+
+  box-shadow:
+    inset 0 1px 0 white,
+    inset 0 -1px 0 #bbb;
+}
+
+
+/* 押した感じ */
+
+.faction-window:hover {
+  transform: translate(2px, 2px);
+
+  box-shadow:
+    1px 1px 0 rgba(0, 0, 0, 0.15);
+}
+
+
+.faction-window:active {
+  transform: translate(4px, 4px);
+
+  box-shadow: none;
+}
+
+
+/* ========================================
+   HEADER NAV
+========================================= */
+
+.header-nav {
+  display: flex;
+  gap: 48px;
+
+  align-items: center;
+}
+
+
+.header-nav a {
+  position: relative;
+
+  padding: 6px 8px;
+
+  font-family: monospace;
+  font-size: 14px;
+  font-weight: bold;
+
+  letter-spacing: 0.18em;
+}
+
+
+/* hoverしたら昔のメニューっぽく反転 */
+
+.header-nav a:hover {
+  background: white;
+  color: var(--orange);
+
+  text-decoration: none;
+}
+
+
+/* リンク末尾に >> */
+
+.header-nav a::after {
+  content: " >>";
+
+  margin-left: 5px;
+
+  font-size: 10px;
+}
+
+
+/* ========================================
+   FOOTER COPY
+========================================= */
+
+.footer-copy {
+  margin: 0;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* ========================================
+   EXTRA PIXEL FEEL
+========================================= */
+
+/* 画像素材を荒く拡大したいとき */
+
+.pixel-image {
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+
+
+/* ========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .header-nav {
+    gap: 16px;
+  }
+
+  .header-nav a {
+    font-size: 11px;
+
+    letter-spacing: 0.08em;
+  }
+
+  .header-nav a::after {
+    display: none;
+  }
+
+
+  .site-title {
+    gap: 6px;
+  }
+
+  .outline-text {
+    -webkit-text-stroke: 1px var(--orange);
+  }
+
+}
+
+body,
+button,
+input,
+textarea,
+select,
+.warning-window,
+.window-title,
+.mini-controls span,
+.header-nav a,
+.faction-titlebar,
+.faction-content,
+.footer {
+  font-family: "DotGothic16", sans-serif;
+}
+
+.sea-visual {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 420px;
+
+  overflow: hidden;
+  pointer-events: none;
+}
+
+
+/* 入道雲 */
+
+.cumulonimbus {
+  position: absolute;
+
+  width: 650px;
+
+  right: -30px;
+  bottom: 80px;
+
+  z-index: 1;
+}
+
+
+/* イルカ */
+
+.dolphin {
+  position: absolute;
+
+  width: 280px;
+
+  left: 7%;
+  bottom: 80px;
+
+  z-index: 3;
+
+  transform: rotate(10deg);
+}
+
+
+/* 海 */
+
+.ocean {
+  position: absolute;
+
+  width: 100%;
+
+  left: 0;
+  bottom: 0;
+
+  z-index: 2;
+}
+
+
+/* 荒いドットを維持 */
+
+.pixel-image {
+  image-rendering: pixelated;
+}
+
+/* ========================================
+   SEA / CLOUD VISUAL 調整版
+========================================= */
+
+.sea-visual {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  /* 420px固定をやめて、右側のかなり上まで使う */
+  height: 75%;
+
+  /* 雲を切らない */
+  overflow: visible;
+
+  pointer-events: none;
+
+  /* テキストより後ろ */
+  z-index: 1;
+}
+
+
+/* 入道雲 */
+
+.cumulonimbus {
+  position: absolute;
+
+  /* ここでサイズ調整 */
+  width: min(850px, 75vw);
+  height: auto;
+
+  /* 右下を基準に置く */
+  right: -40px;
+  bottom: 0;
+
+  z-index: 1;
+
+  image-rendering: pixelated;
+}
+
+
+/* イルカ */
+
+.dolphin {
+  position: absolute;
+
+  width: 280px;
+  height: auto;
+
+  left: 4%;
+  bottom: 80px;
+
+  z-index: 3;
+
+  transform: rotate(10deg);
+
+  image-rendering: pixelated;
+}
+
+
+/* 海 */
+
+.ocean {
+  position: absolute;
+
+  width: 100%;
+  height: auto;
+
+  left: 0;
+  bottom: 0;
+
+  z-index: 2;
+
+  image-rendering: pixelated;
+}
+
+
+/* WARNINGや文章、ENTERは雲より前 */
+
+.warning-window,
+.story-copy,
+.faction-area {
+  position: relative;
+  z-index: 10;
+}
+
+.title-area {
+  min-height: 900px;
+  padding: 0;
+
+  background-image: url("img/2.png");
+  background-repeat: no-repeat;
+
+  /* 全体を必ず表示 */
+  background-size: contain;
+
+  /* 上中央基準 */
+  background-position: center top;
+
+  background-color: #f2f2f2;
+}
