@@ -1301,3 +1301,22 @@ select,
 
   background-color: #f2f2f2;
 }
+
+/* ========================================
+   MOBILE FINAL ADJUSTMENT
+========================================= */
+
+@media (max-width: 800px) {
+
+  .title-area {
+    min-height: 0;
+    height: auto;
+
+    /* FV画像の比率に合わせる */
+    aspect-ratio: 1000 / 1600;
+
+    background-size: 100% auto;
+    background-position: center top;
+  }
+
+}
