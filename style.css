@@ -55,7 +55,7 @@ a {
   background: var(--orange);
   color: white;
 
-  border-bottom: 2px solid var(--orange);
+  border-bottom: 2px dotted var(--orange);
 }
 
 .header-copy {
@@ -84,7 +84,7 @@ a {
   background: #eee;
   color: #111;
 
-  border: 2px solid #444;
+  border: 2px dotted #444;
 
   font-family: Arial, sans-serif;
   font-size: 28px;
@@ -133,7 +133,7 @@ a {
 
   padding: 70px 40px;
 
-  border-right: 1px solid #ddd;
+  border-right: 1px dotted #ddd;
 
   overflow: hidden;
 }
@@ -269,7 +269,7 @@ a {
 .warning-window {
   width: min(680px, 100%);
 
-  border: 2px solid var(--orange);
+  border: 2px dotted var(--orange);
 
   background: rgba(242, 242, 242, 0.94);
 
@@ -286,7 +286,7 @@ a {
   align-items: center;
   justify-content: space-between;
 
-  border-bottom: 2px solid var(--orange);
+  border-bottom: 2px dotted var(--orange);
 
   font-weight: bold;
 }
@@ -303,7 +303,7 @@ a {
   display: grid;
   place-items: center;
 
-  border-left: 1px solid var(--orange);
+  border-left: 1px dotted var(--orange);
 }
 
 .warning-content {
@@ -396,7 +396,7 @@ a {
 
   background: var(--gray);
 
-  border: 2px solid currentColor;
+  border: 2px dotted currentColor;
 
   box-shadow: 5px 5px 0 rgba(0, 0, 0, 0.12);
 
@@ -416,7 +416,7 @@ a {
 .faction-titlebar {
   padding: 4px 10px;
 
-  border-bottom: 2px solid currentColor;
+  border-bottom: 2px dotted currentColor;
 
   font-size: 14px;
 }
@@ -652,7 +652,7 @@ a {
     min-height: 520px;
 
     border-right: 0;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px dotted #ddd;
   }
 
   .english-copy {
@@ -818,7 +818,7 @@ button {
 
   background: #f3f3f3;
 
-  border: 2px solid var(--orange);
+  border: 2px dotted var(--orange);
 
   box-shadow:
     3px 3px 0 #cecece,
@@ -842,7 +842,7 @@ button {
   align-items: center;
   justify-content: space-between;
 
-  border-bottom: 2px solid var(--orange);
+  border-bottom: 2px dotted var(--orange);
 
   background:
     linear-gradient(
@@ -887,7 +887,7 @@ button {
 
   color: #333;
 
-  border-left: 1px solid var(--orange);
+  border-left: 1px dotted var(--orange);
 
   box-shadow:
     inset 1px 1px 0 #ffffff,
@@ -1374,7 +1374,7 @@ select,
 
   color: #555;
 
-  border: 1px solid #888;
+  border: 1px dotted #888;
 
   box-shadow:
     2px 2px 0 #bbb,
@@ -1402,7 +1402,7 @@ select,
       #dddddd
     );
 
-  border-bottom: 1px solid #888;
+  border-bottom: 1px dotted #888;
 
   color: #555;
 
