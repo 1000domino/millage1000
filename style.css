@@ -1337,15 +1337,12 @@ select,
 ========================================= */
 
 .cumulonimbus {
-  position: absolute;
+  display: none;
+}
 
-  width: 120vw;
-  height: auto;
-
-  right: -40px;
-  bottom: 0;
-
-  z-index: 1;
-
-  image-rendering: pixelated;
+@media (max-width: 800px) {
+  .cumulonimbus {
+    display: block;
+    width: 120vw;
+  }
 }
