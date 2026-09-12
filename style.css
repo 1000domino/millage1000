@@ -1331,3 +1331,9 @@ select,
   }
 
 }
+
+@media (max-width: 800px) {
+  .cumulonimbus {
+    width: 120vw;
+  }
+}
