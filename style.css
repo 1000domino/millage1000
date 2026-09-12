@@ -1346,3 +1346,187 @@ select,
     width: 120vw;
   }
 }
+
+/* ========================================
+   SITE MENU
+========================================= */
+
+.site-menu {
+  position: relative;
+  z-index: 10;
+
+  width: min(680px, 100%);
+
+  margin-top: 70px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+
+/* 共通ウィンドウ */
+
+.menu-window {
+  display: block;
+
+  background: #f2f2f2;
+
+  color: #555;
+
+  border: 1px solid #888;
+
+  box-shadow:
+    2px 2px 0 #bbb,
+    4px 4px 0 rgba(0, 0, 0, 0.08);
+
+  font-size: 13px;
+}
+
+
+/* タイトルバー */
+
+.menu-titlebar {
+  min-height: 25px;
+
+  padding: 3px 7px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background:
+    linear-gradient(
+      to bottom,
+      #ffffff,
+      #dddddd
+    );
+
+  border-bottom: 1px solid #888;
+
+  color: #555;
+
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+
+
+/* 中身 */
+
+.menu-content {
+  padding: 13px 15px;
+}
+
+
+/* 通常リンク */
+
+.menu-link-content {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 16px;
+  font-weight: bold;
+
+  letter-spacing: 0.08em;
+}
+
+
+/* hover */
+
+.menu-link:hover {
+  color: var(--orange);
+
+  border-color: var(--orange);
+
+  transform: translate(1px, 1px);
+
+  box-shadow:
+    1px 1px 0 #bbb,
+    2px 2px 0 rgba(0, 0, 0, 0.08);
+}
+
+.menu-link:hover .menu-titlebar {
+  border-color: var(--orange);
+}
+
+
+/* 更新履歴 */
+
+.update-window {
+  grid-column: 1 / -1;
+}
+
+.update-list {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.update-list li {
+  display: flex;
+  gap: 14px;
+
+  padding: 4px 0;
+
+  border-bottom: 1px dotted #bbb;
+}
+
+.update-list time {
+  flex-shrink: 0;
+
+  font-family: monospace;
+
+  color: var(--orange);
+}
+
+.menu-more {
+  display: block;
+
+  margin-top: 10px;
+
+  text-align: right;
+
+  font-family: monospace;
+  font-size: 11px;
+
+  text-decoration: underline;
+}
+
+.menu-more:hover {
+  color: var(--orange);
+}
+
+
+/* ========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 800px) {
+
+  .site-menu {
+    margin-top: 55px;
+
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .update-window {
+    grid-column: auto;
+  }
+
+  .menu-link-content {
+    min-height: 48px;
+
+    font-size: 14px;
+  }
+
+  .menu-window {
+    font-size: 12px;
+  }
+
+}
