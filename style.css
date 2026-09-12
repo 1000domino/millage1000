@@ -1332,8 +1332,20 @@ select,
 
 }
 
-@media (max-width: 800px) {
-  .cumulonimbus {
-    width: 120vw;
-  }
+/* ========================================
+   image3
+========================================= */
+
+.cumulonimbus {
+  position: absolute;
+
+  width: 120vw;
+  height: auto;
+
+  right: -40px;
+  bottom: 0;
+
+  z-index: 1;
+
+  image-rendering: pixelated;
 }
