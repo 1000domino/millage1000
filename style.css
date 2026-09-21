@@ -1938,3 +1938,17 @@ select,
   letter-spacing: 0.08em;
   vertical-align: 0.15em;
 }
+
+
+.qa-text-link,
+.qa-text-link:visited {
+  color: #0000ee;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.qa-text-link:hover {
+  color: #5050ff;
+  text-decoration-thickness: 2px;
+}
