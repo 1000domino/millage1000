@@ -94,6 +94,28 @@
 
   </footer>
 
+  <script>
+  function resizeFrame(frame) {
+    frame.style.height = "1px";
+
+    requestAnimationFrame(() => {
+      const doc = frame.contentDocument;
+      if (doc) {
+        frame.style.height =
+          doc.documentElement.scrollHeight + "px";
+      }
+    });
+  }
+
+  document.querySelectorAll(".explore-frame").forEach(frame => {
+    frame.addEventListener("load", () => resizeFrame(frame));
+  });
+
+  window.addEventListener("resize", () => {
+    document.querySelectorAll(".explore-frame").forEach(resizeFrame);
+  });
+</script>
+  
 </body>
 
 </html>
