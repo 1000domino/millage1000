@@ -1968,25 +1968,19 @@ select,
   margin: 0 auto 80px;
 }
 
-.explore-section:last-child {
-  margin-bottom: 0;
-}
-
-.explore-frame {
+iframe.explore-frame {
   display: block;
-  width: 100%;
+  width: 100% !important;
   border: 0;
   background: transparent;
 }
 
-/* 校内見取り図 */
-.explore-frame--map {
-  height: clamp(760px, 90vw, 1100px);
+iframe.explore-frame--map {
+  height: 1100px !important;
 }
 
-/* 校舎・寮の断面図 */
-.explore-frame--building {
-  height: clamp(860px, 100vw, 1250px);
+iframe.explore-frame--building {
+  height: 1250px !important;
 }
 
 @media (max-width: 600px) {
@@ -1998,11 +1992,11 @@ select,
     margin-bottom: 48px;
   }
 
-  .explore-frame--map {
-    height: 720px;
+  iframe.explore-frame--map {
+    height: 720px !important;
   }
 
-  .explore-frame--building {
-    height: 760px;
+  iframe.explore-frame--building {
+    height: 760px !important;
   }
 }
