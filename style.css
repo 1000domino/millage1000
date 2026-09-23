@@ -1952,3 +1952,57 @@ select,
   color: #5050ff;
   text-decoration-thickness: 2px;
 }
+
+
+/* ========================================
+   EXPLORE MAPS
+======================================== */
+
+.explore-page {
+  width: 100%;
+  padding: 40px 20px 100px;
+}
+
+.explore-section {
+  width: min(1400px, 100%);
+  margin: 0 auto 80px;
+}
+
+.explore-section:last-child {
+  margin-bottom: 0;
+}
+
+.explore-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+}
+
+/* 校内見取り図 */
+.explore-frame--map {
+  height: clamp(760px, 90vw, 1100px);
+}
+
+/* 校舎・寮の断面図 */
+.explore-frame--building {
+  height: clamp(860px, 100vw, 1250px);
+}
+
+@media (max-width: 600px) {
+  .explore-page {
+    padding: 24px 8px 70px;
+  }
+
+  .explore-section {
+    margin-bottom: 48px;
+  }
+
+  .explore-frame--map {
+    height: 720px;
+  }
+
+  .explore-frame--building {
+    height: 760px;
+  }
+}
