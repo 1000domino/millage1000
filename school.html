@@ -1,0 +1,100 @@
+これページに埋めるにはどうしたらいいんだっけ？＾_＾↓に埋めたい
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>再び、一千年</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+  <header class="header">
+
+  <!--  <nav>
+      <a href="#">ABOUT</a>
+      <a href="#">WORLD</a>
+      <a href="#">RULE</a>
+      <a href="#">CHARACTER</a>
+      <a href="#">ARCHIVE</a>
+    </nav> -->
+
+    <p class="header-copy">
+      あなたは殺した。<br>あなたは憎んでいる。
+    </p>
+
+    <div class="window-controls" aria-hidden="true">
+      <span>□</span>
+      <span>─</span>
+      <span>×</span>
+    </div>
+
+  </header>
+
+
+  <!-- ========================================
+       MAIN
+  ========================================= -->
+  <main class="explore-page">
+
+    <!-- 校内見取り図 -->
+    <section class="explore-section" id="school-map">
+      <iframe
+        class="explore-frame explore-frame--map"
+        src="./school-map-preview.html"
+        title="校内見取り図"
+      ></iframe>
+    </section>
+
+    <!-- 校舎断面図 -->
+    <section class="explore-section" id="school-section">
+      <iframe
+        class="explore-frame explore-frame--building"
+        src="./school-cross-section-preview.html"
+        title="校舎断面図"
+      ></iframe>
+    </section>
+
+    <!-- 学生寮断面図 -->
+    <section class="explore-section" id="dorm-section">
+      <iframe
+        class="explore-frame explore-frame--building"
+        src="./dorm-cross-section-preview.html"
+        title="学生寮断面図"
+      ></iframe>
+    </section>
+
+  </main>
+
+
+  <!-- ========================================
+       FOOTER
+  ========================================= -->
+  <footer class="footer">
+
+  <!--  <p class="header-copy">
+      あなたは殺した。あなたは憎んでいる。
+    </p> -->
+
+    <small>
+      © 2026
+    </small>
+
+  </footer>
+
+</body>
+
+</html>
