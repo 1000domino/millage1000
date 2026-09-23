@@ -96,21 +96,33 @@
 
   <script>
   function resizeFrame(frame) {
+    const doc = frame.contentDocument;
+
+    if (!doc) return;
+
     frame.style.height = "1px";
 
     requestAnimationFrame(() => {
-      const doc = frame.contentDocument;
-      if (doc) {
+      requestAnimationFrame(() => {
         frame.style.height =
-          doc.documentElement.scrollHeight + "px";
-      }
+          Math.ceil(doc.documentElement.scrollHeight) + "px";
+      });
     });
   }
 
   document.querySelectorAll(".explore-frame").forEach(frame => {
-    frame.addEventListener("load", () => resizeFrame(frame));
-  });
+    frame.addEventListener("load", () => {
+      resizeFrame(frame);
+    });
 
+    // スクリプト実行前に読み込みが終わっていた場合にも対応
+    if (
+      frame.contentDocument &&
+      frame.contentDocument.readyState === "complete"
+    ) {
+      resizeFrame(frame);
+    }
+  });
 </script>
   
 </body>
