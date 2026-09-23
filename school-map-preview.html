@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>夏の学校｜校内見取り図プレビュー</title>
+  <style>
+    :root {
+      --ink: #3f3f3f;
+      --paper: #f1f1f1;
+      --wall: #a9a9a9;
+      --roof: #dedede;
+      --roof-edge: #ff5a00;
+      --green: #9aa69d;
+      --deep-green: #68756d;
+      --water: #91ddff;
+      --sand: #e5e5e5;
+      --accent: #ff5a00;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", ui-monospace, monospace;
+      background:
+        radial-gradient(circle, rgba(255,90,0,.35) 0 2px, transparent 3px) 0 0 / 24px 24px,
+        #f1f1f1;
+    }
+
+    .page {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }
+
+    header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+
+    h1 { margin: 0; font-size: clamp(28px, 4vw, 54px); font-weight: 500; letter-spacing: .08em; }
+    header p { margin: 6px 0 0; letter-spacing: .16em; opacity: .72; }
+    .hint { font-family: sans-serif; font-size: 13px; opacity: .7; text-align: right; }
+
+    .map-shell {
+      position: relative;
+      overflow: hidden;
+      border: 6px solid var(--accent);
+      border-radius: 0;
+      background: #ededed;
+      box-shadow: 12px 12px 0 rgba(255,90,0,.28);
+    }
+
+    svg { display: block; width: 100%; height: auto; shape-rendering: crispEdges; image-rendering: pixelated; }
+    svg * { vector-effect: non-scaling-stroke; }
+
+    .site-wall { fill: none; stroke: var(--wall); stroke-width: 20; stroke-linejoin: miter; }
+    .path { fill: none; stroke: #d0d0d0; stroke-width: 24; stroke-linecap: square; }
+    .roof { fill: var(--roof); stroke: var(--roof-edge); stroke-width: 7; }
+    .roof-detail { fill: none; stroke: #a5a5a5; stroke-width: 5; }
+    .building-shadow { fill: rgba(78, 78, 78, .22); transform: translate(10px, 10px); }
+    .glass-roof { fill: #d5d5d5; stroke: var(--accent); stroke-width: 7; opacity: 1; }
+    .tree-crown { fill: var(--green); stroke: var(--deep-green); stroke-width: 6; }
+    .tree-highlight { fill: #c1c8c3; opacity: .9; }
+
+    .location { cursor: pointer; outline: none; transition: filter .2s ease, opacity .2s ease; }
+    .location:hover, .location:focus-visible { filter: brightness(1.04) drop-shadow(8px 8px 0 rgba(255,90,0,.42)); }
+    .location:hover .location-label, .location:focus-visible .location-label { opacity: 1; transform: translateY(-4px); }
+
+    .location-label {
+      pointer-events: none;
+      opacity: .84;
+      transition: .2s ease;
+      font-family: ui-monospace, "Hiragino Kaku Gothic ProN", monospace;
+      font-size: 22px;
+      font-weight: 700;
+      paint-order: stroke;
+      fill: #3f3f3f;
+      stroke: rgba(241,241,241,.98);
+      stroke-width: 10px;
+      stroke-linejoin: round;
+    }
+
+    .pool { fill: var(--water); stroke: #178bd2; stroke-width: 7; }
+    .pool-line { stroke: rgba(255,255,255,.82); stroke-width: 5; }
+    .ground { fill: var(--sand); stroke: var(--accent); stroke-width: 7; }
+    .ground-line { fill: none; stroke: #ffffff; stroke-width: 5; }
+    .courtyard { fill: #d6d6d6; stroke: var(--accent); stroke-width: 7; }
+
+    .info-panel {
+      position: absolute;
+      right: 22px;
+      bottom: 22px;
+      width: min(360px, calc(100% - 44px));
+      min-height: 138px;
+      padding: 20px 22px;
+      border: 6px solid var(--accent);
+      border-radius: 0;
+      background: rgba(248, 248, 248, .96);
+      box-shadow: 8px 8px 0 rgba(255,90,0,.30);
+    }
+
+    .info-panel .eyebrow { margin: 0 0 6px; font: 700 11px/1.2 sans-serif; letter-spacing: .2em; color: var(--accent); }
+    .info-panel h2 { margin: 0 0 8px; font-size: 25px; font-weight: 500; }
+    .info-panel p { margin: 0; line-height: 1.8; font-size: 14px; }
+
+    @media (max-width: 700px) {
+      .page { padding: 20px 10px 34px; }
+      header { align-items: start; flex-direction: column; }
+      .hint { text-align: left; }
+      .map-shell { border-radius: 0; }
+      .info-panel { position: relative; right: auto; bottom: auto; width: auto; margin: 10px; }
+      .location-label { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header>
+      <div>
+        <h1>夏の、あの場所で</h1>
+        <p>校内見取り図・試作</p>
+      </div>
+      <div class="hint">建物をクリックすると探索情報が表示されます</div>
+    </header>
+
+    <section class="map-shell" aria-label="校内見取り図">
+      <svg viewBox="0 0 1200 820" role="img" aria-labelledby="map-title map-desc">
+        <title id="map-title">壁に囲まれた夏の学校</title>
+        <desc id="map-desc">真上から見た、屋上プールのある本校舎、体育館、部室棟、学生寮、グラウンド、昇降口の見取り図</desc>
+
+        <defs>
+          <g id="tree">
+            <rect class="tree-crown" x="-24" y="-16" width="48" height="32"/>
+            <rect class="tree-crown" x="-16" y="-24" width="32" height="48"/>
+            <rect class="tree-highlight" x="-14" y="-14" width="20" height="16"/>
+            <rect fill="#68756d" x="6" y="4" width="14" height="14"/>
+          </g>
+          <g id="sunflower">
+            <rect x="-4" y="4" width="8" height="20" fill="#7d887f"/>
+            <rect x="-12" y="-8" width="24" height="16" fill="#ffd400"/>
+            <rect x="-8" y="-12" width="16" height="24" fill="#ffd400"/>
+            <rect x="-4" y="-4" width="8" height="8" fill="#4a4a4a"/>
+          </g>
+          <pattern id="piloti" width="38" height="34" patternUnits="userSpaceOnUse">
+            <rect width="38" height="34" fill="#d2d2d2"/>
+            <rect x="7" y="0" width="8" height="34" fill="#777"/>
+          </pattern>
+        </defs>
+
+        <!-- 敷地 -->
+        <rect x="36" y="38" width="1128" height="736" fill="#d8d8d8"/>
+        <rect x="48" y="50" width="1104" height="712" class="site-wall"/>
+
+        <!-- グラウンド -->
+        <g class="location" tabindex="0" role="button" data-place="ground">
+          <rect x="78" y="418" width="330" height="310" class="ground"/>
+          <rect x="105" y="452" width="270" height="220" class="ground-line"/>
+          <rect x="190" y="512" width="100" height="100" class="ground-line"/>
+          <line x1="240" y1="452" x2="240" y2="672" class="ground-line"/>
+          <text x="100" y="705" class="location-label">グラウンド</text>
+        </g>
+
+        <!-- 遊歩道 -->
+        <path d="M610 718 L610 660 L610 605" class="path"/>
+        <path d="M878 255 L878 168" class="path"/>
+        <path d="M365 315 L430 315" class="path"/>
+
+        <!-- 体育館 -->
+        <g class="location" tabindex="0" role="button" data-place="gym">
+          <path d="M94 118H110V102H332V118H348V330H332V346H110V330H94Z" class="building-shadow"/>
+          <path d="M78 108H94V92H316V108H332V320H316V336H94V320H78Z" class="roof"/>
+          <path d="M102 148H308 M102 188H308 M102 228H308 M102 268H308" class="roof-detail"/>
+          <text x="120" y="236" class="location-label">体育館</text>
+        </g>
+
+        <!-- 部室棟 -->
+        <g class="location" tabindex="0" role="button" data-place="clubrooms">
+          <rect x="88" y="66" width="250" height="54" class="building-shadow"/>
+          <rect x="80" y="58" width="250" height="54" class="roof"/>
+          <path d="M112 58v54 M145 58v54 M178 58v54 M211 58v54 M244 58v54 M277 58v54" class="roof-detail"/>
+          <text x="100" y="92" class="location-label">部室棟</text>
+        </g>
+
+        <!-- 体育館への渡り廊下 -->
+        <rect x="350" y="256" width="104" height="34" class="glass-roof"/>
+        <path d="M368 256v34 M389 256v34 M410 256v34 M431 256v34" class="roof-detail"/>
+
+        <!-- 本校舎北棟 -->
+        <g class="location" tabindex="0" role="button" data-place="school">
+          <rect x="430" y="220" width="440" height="110" class="building-shadow"/>
+          <rect x="422" y="212" width="440" height="110" class="roof"/>
+          <path d="M452 242 H832 M452 272 H832" class="roof-detail"/>
+          <text x="442" y="302" class="location-label">本校舎</text>
+        </g>
+
+        <!-- 屋上プール -->
+        <g class="location" tabindex="0" role="button" data-place="rooftop">
+          <rect x="540" y="232" width="245" height="72" class="pool"/>
+          <line x1="580" y1="235" x2="580" y2="301" class="pool-line"/>
+          <line x1="620" y1="235" x2="620" y2="301" class="pool-line"/>
+          <line x1="660" y1="235" x2="660" y2="301" class="pool-line"/>
+          <line x1="700" y1="235" x2="700" y2="301" class="pool-line"/>
+          <line x1="740" y1="235" x2="740" y2="301" class="pool-line"/>
+          <rect x="798" y="238" width="42" height="48" class="roof"/>
+          <circle cx="819" cy="250" r="11" fill="#849699"/>
+          <text x="550" y="279" class="location-label">屋上プール</text>
+        </g>
+
+        <!-- 左右の渡り廊下：南北をつないでロの字にする -->
+        <rect x="422" y="322" width="44" height="180" class="glass-roof"/>
+        <path d="M422 350h44 M422 382h44 M422 414h44 M422 446h44 M422 478h44" class="roof-detail"/>
+        <rect x="818" y="322" width="44" height="180" class="glass-roof"/>
+        <path d="M818 350h44 M818 382h44 M818 414h44 M818 446h44 M818 478h44" class="roof-detail"/>
+
+        <!-- 中庭 -->
+        <g class="location" tabindex="0" role="button" data-place="courtyard">
+          <rect x="478" y="338" width="328" height="150" class="courtyard"/>
+          <!-- 夏の桜：中庭の中央に、青葉を四角い塊で表現 -->
+          <rect x="633" y="386" width="18" height="66" fill="#6f625b"/>
+          <rect x="605" y="350" width="74" height="50" class="tree-crown"/>
+          <rect x="587" y="366" width="112" height="34" class="tree-crown"/>
+          <rect x="619" y="334" width="46" height="82" class="tree-crown"/>
+          <rect x="607" y="354" width="26" height="18" class="tree-highlight"/>
+          <!-- ベンチ -->
+          <rect x="506" y="444" width="58" height="12" fill="#777"/>
+          <rect x="720" y="444" width="58" height="12" fill="#777"/>
+          <text x="608" y="478" class="location-label">中庭</text>
+        </g>
+
+        <!-- 木立の中の東屋 -->
+        <g aria-label="木立の中の東屋">
+          <rect x="947" y="410" width="82" height="52" fill="#e2e2e2" stroke="#ff5a00" stroke-width="7"/>
+          <path d="M935 410H1041L1027 386H951Z" fill="#bdbdbd" stroke="#ff5a00" stroke-width="7"/>
+          <rect x="953" y="440" width="10" height="28" fill="#777"/>
+          <rect x="1013" y="440" width="10" height="28" fill="#777"/>
+        </g>
+
+        <!-- 寮 -->
+        <g class="location" tabindex="0" role="button" data-place="dormitory">
+          <rect x="886" y="112" width="224" height="166" class="building-shadow"/>
+          <rect x="878" y="104" width="224" height="166" class="roof"/>
+          <path d="M908 104v166 M948 104v166 M988 104v166 M1028 104v166 M1068 104v166" class="roof-detail"/>
+          <text x="930" y="196" class="location-label">学生寮</text>
+        </g>
+
+        <!-- 南棟と一体化した昇降口 -->
+        <g class="location" tabindex="0" role="button" data-place="entrance">
+          <rect x="430" y="510" width="440" height="84" class="building-shadow"/>
+          <rect x="422" y="502" width="440" height="84" class="roof"/>
+          <rect x="450" y="520" width="120" height="66" fill="url(#piloti)" stroke="#ff5a00" stroke-width="7"/>
+          <path d="M594 524h150 M594 548h150" class="roof-detail"/>
+          <rect x="624" y="558" width="48" height="28" fill="#758889" stroke="#40585d" stroke-width="4"/>
+          <text x="690" y="574" class="location-label">昇降口</text>
+        </g>
+
+        <!-- 校舎の外周に咲く向日葵 -->
+        <g aria-label="校舎外周の向日葵">
+          <use href="#sunflower" x="400" y="368"/><use href="#sunflower" x="400" y="408"/><use href="#sunflower" x="400" y="448"/>
+          <use href="#sunflower" x="446" y="622"/><use href="#sunflower" x="486" y="622"/><use href="#sunflower" x="526" y="622"/>
+          <use href="#sunflower" x="566" y="622"/><use href="#sunflower" x="606" y="622"/><use href="#sunflower" x="646" y="622"/>
+          <use href="#sunflower" x="686" y="622"/><use href="#sunflower" x="726" y="622"/><use href="#sunflower" x="766" y="622"/><use href="#sunflower" x="806" y="622"/>
+          <use href="#sunflower" x="878" y="292"/><use href="#sunflower" x="918" y="292"/><use href="#sunflower" x="958" y="292"/>
+        </g>
+
+        <!-- 木々 -->
+        <g opacity=".95">
+          <use href="#tree" x="390" y="100"/><use href="#tree" x="450" y="96"/>
+          <use href="#tree" x="510" y="98"/><use href="#tree" x="575" y="92"/>
+          <use href="#tree" x="642" y="94"/><use href="#tree" x="710" y="100"/>
+          <use href="#tree" x="780" y="94"/><use href="#tree" x="844" y="91"/>
+          <use href="#tree" x="1110" y="326"/><use href="#tree" x="1106" y="390"/>
+          <use href="#tree" x="1100" y="455"/><use href="#tree" x="1096" y="520"/>
+          <use href="#tree" x="1090" y="586"/><use href="#tree" x="1080" y="650"/>
+          <use href="#tree" x="750" y="704"/><use href="#tree" x="810" y="700"/>
+          <use href="#tree" x="870" y="705"/><use href="#tree" x="930" y="700"/>
+          <use href="#tree" x="990" y="704"/><use href="#tree" x="1046" y="700"/>
+          <use href="#tree" x="395" y="690"/><use href="#tree" x="446" y="722"/>
+          <use href="#tree" x="904" y="350"/><use href="#tree" x="968" y="354"/>
+          <use href="#tree" x="1032" y="348"/><use href="#tree" x="900" y="430"/>
+          <use href="#tree" x="908" y="510"/><use href="#tree" x="932" y="566"/>
+          <use href="#tree" x="1012" y="570"/>
+        </g>
+      </svg>
+
+      <aside class="info-panel" aria-live="polite">
+        <p class="eyebrow">EXPLORE</p>
+        <h2 id="place-title">校内見取り図</h2>
+        <p id="place-copy">気になる場所を選択してください。まだ、どこへでも行けるようです。</p>
+      </aside>
+    </section>
+  </main>
+
+  <script>
+    const places = {
+      school: ["本校舎", "北棟と昇降口を、左右の渡り廊下がつないでいる。廊下には、人の気配だけが残っている。"],
+      rooftop: ["屋上プール", "水面は風もないのに揺れている。向こう岸に、誰かが立っていた気がした。"],
+      courtyard: ["中庭", "中央には夏の青葉を茂らせた桜。その左右に、誰かを待つためのようなベンチが置かれている。"],
+      gym: ["体育館", "扉には鍵がかかっている。中からボールの弾む音が聞こえた。"],
+      clubrooms: ["部室棟", "使われていないはずの部室に、まだ新しい私物が残されている。"],
+      dormitory: ["学生寮", "消灯後も、いくつかの窓だけが明るい。"],
+      entrance: ["昇降口", "外へ通じる門はない。それでも下駄箱には、全員分の靴が揃っている。"],
+      ground: ["グラウンド", "白線の先は高い壁で途切れている。空だけが、どこまでも広い。"]
+    };
+
+    const title = document.querySelector("#place-title");
+    const copy = document.querySelector("#place-copy");
+
+    function showPlace(element) {
+      const place = places[element.dataset.place];
+      if (!place) return;
+      title.textContent = place[0];
+      copy.textContent = place[1];
+    }
+
+    document.querySelectorAll(".location").forEach((element) => {
+      element.addEventListener("click", () => showPlace(element));
+      element.addEventListener("keydown", (event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          showPlace(element);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
