@@ -308,15 +308,56 @@
 
         <!-- 3F：図書室 -->
         <g class="location" role="button" tabindex="0" data-place="library">
-          <rect x="640" y="348" width="530" height="160" class="room-fill"/>
-          <rect x="666" y="372" width="90" height="96" fill="#858585"/>
-          <path d="M674 396H748 M674 420H748 M674 444H748" stroke="#dedede" stroke-width="6"/>
-          <rect x="790" y="372" width="90" height="96" fill="#858585"/>
-          <path d="M798 396H872 M798 420H872 M798 444H872" stroke="#dedede" stroke-width="6"/>
-          <rect x="922" y="376" width="190" height="48" class="glass"/>
-          <rect x="928" y="454" width="142" height="14" class="furniture"/>
-          <rect x="640" y="348" width="530" height="160" class="room-hit"/>
-          <text x="968" y="487" class="room-label">図書室</text>
+          <rect x="640" y="348" width="265" height="160" class="room-fill"/>
+
+        <!-- 本棚 -->
+          <rect x="658" y="372" width="90" height="96" fill="#858585"/>
+          <path
+            d="M666 396H740 M666 420H740 M666 444H740"
+            stroke="#dedede"
+            stroke-width="6"
+          />
+          <rect x="772" y="372" width="90" height="96" fill="#858585"/>
+          <path
+            d="M780 396H854 M780 420H854 M780 444H854"
+            stroke="#dedede"
+            stroke-width="6"
+          />
+          <rect x="640" y="348" width="265" height="160" class="room-hit"/>
+          <text x="668" y="487" class="room-label">図書室</text>
+        </g>
+
+        <!-- 3F：美術室 -->
+        <g class="location" role="button" tabindex="0" data-place="art-room">
+          <rect x="905" y="348" width="265" height="160" class="room-alt"/>
+          <!-- イーゼルとキャンバス -->
+          <rect
+            x="930"
+            y="370"
+            width="88"
+            height="62"
+            fill="#f1f1f1"
+            stroke="#858585"
+            stroke-width="6"
+          />
+          <rect x="946" y="384" width="24" height="18" fill="#91ddff"/>
+          <rect x="978" y="400" width="22" height="16" fill="#ffd400"/>
+          <path
+            d="M974 432V446 M974 442L948 470 M974 442L1000 470"
+            fill="none"
+            stroke="#858585"
+            stroke-width="8"
+          />
+          <!-- 画材棚 -->
+          <rect x="1040" y="370" width="102" height="82" class="furniture"/>
+          <path
+            d="M1048 394H1134 M1048 418H1134"
+            stroke="#dedede"
+            stroke-width="6"
+          />
+          <rect x="1032" y="462" width="116" height="12" class="furniture"/>
+          <rect x="905" y="348" width="265" height="160" class="room-hit"/>
+          <text x="932" y="487" class="room-label">美術室</text>
         </g>
 
         <!-- 2F：教室 -->
@@ -410,6 +451,7 @@
       "principal-room": ["校長室", "机の上に名前のない印章が置かれている。壁の歴代写真は、すべて同じ顔だ。"],
       "classroom-3": ["教室", "黒板の日付は今日になっている。"],
       library: ["図書室", "貸出記録には、知らない生徒の名前が残っている。"],
+      "art-room": ["美術室","誰かが描いたのだろう、片隅に置かれたままのデッサンは少しずつ老いていく。"],
       "classroom-2": ["教室", "窓際の机に、乾ききっていない水滴の跡が残っている。"],
       "home-economics": ["家庭科室", "水の音が聞こえる。"],
       "broadcast-room": ["放送室", "電源の入っていないマイクが、ときどき誰かの呼吸を拾う。"],
