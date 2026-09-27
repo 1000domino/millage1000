@@ -437,3 +437,38 @@ a:focus-visible {
     font-size: 16px;
   }
 }
+
+/* 本編の舞台：8月だけ強調 */
+#month-08 {
+  position: relative;
+  margin-top: 16px;
+  border-color: #ff5a00;
+  box-shadow: 5px 5px 0 #ffc8aa;
+}
+
+#month-08 .month-card__label {
+  background: #ff5a00;
+  color: #fff;
+  border-right-color: #ff5a00;
+}
+
+#month-08 .month-card__body {
+  background: #fff8f3;
+}
+
+#month-08 .month-card__body h2 {
+  color: #ff5a00;
+}
+
+#month-08::after {
+  content: "NOW";
+  position: absolute;
+  top: -14px;
+  right: 8px;
+  padding: 2px 7px;
+  background: #ff5a00;
+  color: #fff;
+  font-family: "DotGothic16", monospace;
+  font-size: 12px;
+  line-height: 1.4;
+}
