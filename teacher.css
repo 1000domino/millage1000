@@ -388,3 +388,16 @@ body.teachers-site {
     font-size: 10px;
   }
 }
+
+@media (max-width: 700px) {
+  .teacher-photo {
+    aspect-ratio: auto;
+    height: clamp(86px, 24vw, 120px);
+    background: #fff;
+  }
+
+  .teacher-photo img {
+    object-fit: contain;
+    object-position: center;
+  }
+}
