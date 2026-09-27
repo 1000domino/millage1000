@@ -418,11 +418,15 @@ a:focus-visible {
   }
 }
 
-/* 全月カードの取り消し線を短くする */
+/* 全月カードの取り消し線を短めに */
 .month-card:not(#month-08) .month-card__number::before {
-  width: 34px;
+  width: 26px;
 }
 
 .month-card:not(#month-08) .month-card__en::before {
-  width: 20px;
+  width: 14px;
+}
+
+.month-card:not(#month-08) h2::before {
+  width: 28px;
 }
