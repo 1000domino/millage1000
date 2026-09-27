@@ -1,1 +1,674 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>年間予定表｜再び、一千年</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --schedule-orange: #ff5a00;
+      --schedule-ink: #3f3f3f;
+      --schedule-gray: #d8d8d8;
+      --schedule-gray-dark: #8d8d8d;
+      --schedule-paper: #f1f1f1;
+      --schedule-white: #fff;
+      --schedule-blue: #91ddff;
+      --schedule-blue-dark: #178bd2;
+      --schedule-yellow: #ffd400;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--schedule-ink);
+      font-family: "DotGothic16", "Yu Gothic", monospace;
+      background:
+        radial-gradient(circle, rgba(255, 90, 0, .3) 0 2px, transparent 3px) 0 0 / 24px 24px,
+        var(--schedule-paper);
+    }
+
+    a {
+      color: #0055cc;
+    }
+
+    a:visited {
+      color: #7040a0;
+    }
+
+    a:hover,
+    a:focus-visible {
+      color: var(--schedule-orange);
+      background: #fff2e9;
+    }
+
+    .header {
+      min-height: 108px;
+      padding: 22px clamp(20px, 5vw, 64px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--schedule-white);
+      background: var(--schedule-orange);
+      border-bottom: 6px solid var(--schedule-ink);
+    }
+
+    .header-copy {
+      margin: 0;
+      font-size: clamp(18px, 2.4vw, 28px);
+      line-height: 1.55;
+      letter-spacing: .08em;
+    }
+
+    .window-controls {
+      display: flex;
+      gap: 8px;
+      color: var(--schedule-ink);
+      font-family: sans-serif;
+      font-weight: 700;
+    }
+
+    .window-controls span {
+      width: 44px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: var(--schedule-white);
+      border: 3px solid var(--schedule-ink);
+      box-shadow: 3px 3px 0 rgba(0, 0, 0, .2);
+    }
+
+    .schedule-page {
+      width: min(760px, calc(100% - 20px));
+      margin: 28px auto 64px;
+    }
+
+    .schedule-window {
+      background: rgba(255, 255, 255, .97);
+      border: 3px solid var(--schedule-ink);
+      box-shadow: 7px 7px 0 rgba(255, 90, 0, .28);
+    }
+
+    .schedule-window__bar {
+      min-height: 34px;
+      padding: 5px 8px 5px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--schedule-white);
+      background: var(--schedule-orange);
+      border-bottom: 3px solid var(--schedule-ink);
+      font-family: monospace;
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    .schedule-window__controls {
+      letter-spacing: .3em;
+    }
+
+    .schedule-window__body {
+      padding: 24px 16px 20px;
+      text-align: center;
+    }
+
+    .schedule-kicker {
+      margin: 0 0 7px;
+      color: var(--schedule-orange);
+      font-family: monospace;
+      font-size: 11px;
+      letter-spacing: .16em;
+    }
+
+    .schedule-window h1 {
+      margin: 0;
+      font-size: clamp(34px, 12vw, 56px);
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: .08em;
+    }
+
+    .schedule-lead {
+      margin: 13px 0 0;
+      color: #666;
+      font-family: "Yu Gothic", sans-serif;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .schedule-notice {
+      margin: 20px 0;
+      padding: 10px 12px;
+      color: var(--schedule-ink);
+      background: var(--schedule-white);
+      border: 2px dashed var(--schedule-gray-dark);
+      font-family: "Yu Gothic", sans-serif;
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .schedule-notice strong {
+      margin-right: 5px;
+      padding: 1px 5px;
+      color: var(--schedule-white);
+      background: var(--schedule-orange);
+      font-family: monospace;
+      font-weight: 400;
+    }
+
+    .month-index {
+      margin: 0 0 28px;
+      padding: 8px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 4px;
+      background: var(--schedule-gray);
+      border: 2px solid var(--schedule-ink);
+      box-shadow: 4px 4px 0 rgba(63, 63, 63, .2);
+    }
+
+    .month-index a {
+      min-height: 34px;
+      display: grid;
+      place-items: center;
+      color: var(--schedule-ink);
+      background: var(--schedule-white);
+      border: 1px solid var(--schedule-gray-dark);
+      font-family: monospace;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .month-index a:hover,
+    .month-index a:focus-visible {
+      color: var(--schedule-white);
+      background: var(--schedule-orange);
+    }
+
+    .term-heading {
+      margin: 32px 0 12px;
+      padding: 6px 10px;
+      color: var(--schedule-white);
+      background: var(--schedule-ink);
+      border-left: 12px solid var(--schedule-orange);
+      font-family: monospace;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: .14em;
+    }
+
+    .month-card {
+      scroll-margin-top: 12px;
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      background: rgba(255, 255, 255, .97);
+      border: 2px solid var(--schedule-ink);
+      box-shadow: 5px 5px 0 var(--schedule-gray);
+    }
+
+    .month-card + .month-card {
+      margin-top: 14px;
+    }
+
+    .month-card__label {
+      padding: 13px 6px 11px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--schedule-white);
+      background: var(--schedule-orange);
+      border-right: 2px solid var(--schedule-ink);
+      text-align: center;
+    }
+
+    .month-card:nth-of-type(even) .month-card__label {
+      color: var(--schedule-ink);
+      background: var(--schedule-blue);
+    }
+
+    .month-card__number {
+      font-family: monospace;
+      font-size: 34px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .month-card__en {
+      margin-top: 5px;
+      font-family: monospace;
+      font-size: 10px;
+      letter-spacing: .15em;
+    }
+
+    .month-card__body {
+      min-width: 0;
+      padding: 13px 14px 14px;
+    }
+
+    .month-card h2 {
+      margin: 0 0 8px;
+      padding-bottom: 5px;
+      border-bottom: 1px dotted #888;
+      font-size: 18px;
+      font-weight: 400;
+    }
+
+    .event-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .event-list li {
+      position: relative;
+      padding: 5px 0 5px 14px;
+      font-family: "Yu Gothic", sans-serif;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .event-list li::before {
+      content: "■";
+      position: absolute;
+      top: 7px;
+      left: 0;
+      color: var(--schedule-orange);
+      font-size: 8px;
+    }
+
+    .event-list time {
+      margin-right: 7px;
+      color: #777;
+      font-family: monospace;
+      font-size: 11px;
+    }
+
+    .schedule-bottom-nav {
+      margin-top: 38px;
+      padding: 17px 8px 15px;
+      border-top: 2px dotted #777;
+      border-bottom: 2px dotted #777;
+      font-family: monospace;
+      font-size: 12px;
+      line-height: 2;
+      text-align: center;
+      word-spacing: .25em;
+    }
+
+    .schedule-bottom-nav span {
+      color: #999;
+      user-select: none;
+    }
+
+    .footer {
+      min-height: 92px;
+      padding: 30px clamp(20px, 5vw, 64px);
+      color: var(--schedule-white);
+      background: var(--schedule-orange);
+      border-top: 6px solid var(--schedule-ink);
+    }
+
+    .footer small {
+      font-family: monospace;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        min-height: 86px;
+        padding: 17px 18px;
+      }
+
+      .window-controls {
+        gap: 5px;
+      }
+
+      .window-controls span {
+        width: 30px;
+        height: 30px;
+        border-width: 2px;
+      }
+
+      .window-controls span:first-child {
+        display: none;
+      }
+
+      .schedule-page {
+        margin-top: 20px;
+      }
+
+      .month-index {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .schedule-window__body {
+        padding-inline: 12px;
+      }
+
+      .month-card {
+        grid-template-columns: 72px minmax(0, 1fr);
+      }
+
+      .month-card__number {
+        font-size: 29px;
+      }
+
+      .month-card__body {
+        padding-inline: 11px;
+      }
+
+      .event-list li {
+        font-size: 12px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+
+<body id="top">
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+  <header class="header">
+    <p class="header-copy">
+      あなたは殺した。<br>あなたは憎んでいる。
+    </p>
+
+    <div class="window-controls" aria-hidden="true">
+      <span>□</span>
+      <span>─</span>
+      <span>×</span>
+    </div>
+  </header>
+
+
+  <!-- ========================================
+       MAIN
+  ========================================= -->
+  <main class="schedule-page">
+
+    <section class="schedule-window" aria-labelledby="schedule-title">
+      <div class="schedule-window__bar">
+        <span>school_calendar.html</span>
+        <span class="schedule-window__controls" aria-hidden="true">─ □ ×</span>
+      </div>
+
+      <div class="schedule-window__body">
+        <p class="schedule-kicker">ANNUAL SCHOOL EVENTS</p>
+        <h1 id="schedule-title">年間予定表</h1>
+        <p class="schedule-lead">
+          本校の主な年間行事をご案内します。<br>
+          予定は予告なく変更される場合があります。
+        </p>
+      </div>
+    </section>
+
+    <p class="schedule-notice">
+      <strong>INFO</strong>
+      年度は4月から始まり、翌年3月に終了します。
+    </p>
+
+    <nav class="month-index" aria-label="月別ページ内リンク">
+      <a href="#month-04">04</a>
+      <a href="#month-05">05</a>
+      <a href="#month-06">06</a>
+      <a href="#month-07">07</a>
+      <a href="#month-08">08</a>
+      <a href="#month-09">09</a>
+      <a href="#month-10">10</a>
+      <a href="#month-11">11</a>
+      <a href="#month-12">12</a>
+      <a href="#month-01">01</a>
+      <a href="#month-02">02</a>
+      <a href="#month-03">03</a>
+    </nav>
+
+
+    <!-- ========================================
+         1学期
+    ========================================= -->
+    <h2 class="term-heading">FIRST TERM / 1学期</h2>
+
+    <section class="month-card" id="month-04">
+      <div class="month-card__label">
+        <span class="month-card__number">04</span>
+        <span class="month-card__en">APR</span>
+      </div>
+      <div class="month-card__body">
+        <h2>4月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>始業式・入学式</li>
+          <li><time>中旬</time>新入生オリエンテーション</li>
+          <li><time>下旬</time>健康診断</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-05">
+      <div class="month-card__label">
+        <span class="month-card__number">05</span>
+        <span class="month-card__en">MAY</span>
+      </div>
+      <div class="month-card__body">
+        <h2>5月</h2>
+        <ul class="event-list">
+          <li><time>中旬</time>中間考査</li>
+          <li><time>下旬</time>生徒総会</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-06">
+      <div class="month-card__label">
+        <span class="month-card__number">06</span>
+        <span class="month-card__en">JUN</span>
+      </div>
+      <div class="month-card__body">
+        <h2>6月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>衣替え</li>
+          <li><time>中旬</time>体育祭</li>
+          <li><time>下旬</time>プール開き</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-07">
+      <div class="month-card__label">
+        <span class="month-card__number">07</span>
+        <span class="month-card__en">JUL</span>
+      </div>
+      <div class="month-card__body">
+        <h2>7月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>期末考査</li>
+          <li><time>下旬</time>終業式</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         夏季
+    ========================================= -->
+    <h2 class="term-heading">SUMMER / 夏季</h2>
+
+    <section class="month-card" id="month-08">
+      <div class="month-card__label">
+        <span class="month-card__number">08</span>
+        <span class="month-card__en">AUG</span>
+      </div>
+      <div class="month-card__body">
+        <h2>8月</h2>
+        <ul class="event-list">
+          <li><time>期間中</time>夏季休業</li>
+          <li><time>平日</time>屋上プール開放</li>
+          <li><time>下旬</time>登校日</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         2学期
+    ========================================= -->
+    <h2 class="term-heading">SECOND TERM / 2学期</h2>
+
+    <section class="month-card" id="month-09">
+      <div class="month-card__label">
+        <span class="month-card__number">09</span>
+        <span class="month-card__en">SEP</span>
+      </div>
+      <div class="month-card__body">
+        <h2>9月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>始業式</li>
+          <li><time>下旬</time>文化祭</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-10">
+      <div class="month-card__label">
+        <span class="month-card__number">10</span>
+        <span class="month-card__en">OCT</span>
+      </div>
+      <div class="month-card__body">
+        <h2>10月</h2>
+        <ul class="event-list">
+          <li><time>中旬</time>中間考査</li>
+          <li><time>下旬</time>球技大会</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-11">
+      <div class="month-card__label">
+        <span class="month-card__number">11</span>
+        <span class="month-card__en">NOV</span>
+      </div>
+      <div class="month-card__body">
+        <h2>11月</h2>
+        <ul class="event-list">
+          <li><time>中旬</time>芸術鑑賞会</li>
+          <li><time>下旬</time>校内美術展</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-12">
+      <div class="month-card__label">
+        <span class="month-card__number">12</span>
+        <span class="month-card__en">DEC</span>
+      </div>
+      <div class="month-card__body">
+        <h2>12月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>期末考査</li>
+          <li><time>中旬</time>合唱祭</li>
+          <li><time>下旬</time>終業式</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ========================================
+         3学期
+    ========================================= -->
+    <h2 class="term-heading">THIRD TERM / 3学期</h2>
+
+    <section class="month-card" id="month-01">
+      <div class="month-card__label">
+        <span class="month-card__number">01</span>
+        <span class="month-card__en">JAN</span>
+      </div>
+      <div class="month-card__body">
+        <h2>1月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>始業式</li>
+          <li><time>中旬</time>書き初め展</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-02">
+      <div class="month-card__label">
+        <span class="month-card__number">02</span>
+        <span class="month-card__en">FEB</span>
+      </div>
+      <div class="month-card__body">
+        <h2>2月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>生徒会選挙</li>
+          <li><time>下旬</time>学年末考査</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="month-card" id="month-03">
+      <div class="month-card__label">
+        <span class="month-card__number">03</span>
+        <span class="month-card__en">MAR</span>
+      </div>
+      <div class="month-card__body">
+        <h2>3月</h2>
+        <ul class="event-list">
+          <li><time>上旬</time>卒業式</li>
+          <li><time>下旬</time>修了式</li>
+        </ul>
+      </div>
+    </section>
+
+
+    <!-- ページリンク -->
+    <nav class="schedule-bottom-nav" aria-label="サイト内リンク">
+      <a href="index.html">HOME</a>
+      <span aria-hidden="true">｜</span>
+      <a href="qa.html">Q&amp;A</a>
+      <span aria-hidden="true">｜</span>
+      <a href="school.html">SCHOOL</a>
+      <span aria-hidden="true">｜</span>
+      <a href="history.html">UPDATE LOG</a>
+      <span aria-hidden="true">｜</span>
+      <a href="#top">PAGE TOP</a>
+    </nav>
+
+  </main>
+
+
+  <!-- ========================================
+       FOOTER
+  ========================================= -->
+  <footer class="footer">
+    <small>© 2026</small>
+  </footer>
+
+</body>
+
+</html>
 
