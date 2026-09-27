@@ -433,7 +433,7 @@ a:focus-visible {
 
 @media (max-width: 600px) {
   .month-card:not(#month-08) .month-card__number::after {
-    left: calc(100% - 4px);
+    left: calc(100% - 1px);
     font-size: 16px;
   }
 }
