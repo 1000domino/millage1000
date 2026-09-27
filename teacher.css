@@ -17,13 +17,6 @@ body.teachers-site {
 }
 
 
-.teachers-page a { color: #0055cc; text-decoration: underline; }
-.teachers-page a:visited { color: #7040a0; }
-.teachers-page a:hover, .teachers-page a:focus-visible {
-  color: var(--teachers-orange);
-  background: #fff2e9;
-}
-
 .teachers-page {
   color: var(--teachers-ink);
   width: min(880px, calc(100% - 20px));
@@ -309,23 +302,6 @@ body.teachers-site {
   letter-spacing: .04em;
 }
 
-.teachers-bottom-nav {
-  margin-top: 38px;
-  padding: 17px 8px 15px;
-  border-top: 2px dotted #777;
-  border-bottom: 2px dotted #777;
-  font-family: monospace;
-  font-size: 12px;
-  line-height: 2;
-  text-align: center;
-  word-spacing: .25em;
-}
-
-.teachers-bottom-nav span {
-  color: #999;
-  user-select: none;
-}
-
 @media (max-width: 700px) {
   .teachers-page {
     margin-top: 20px;
@@ -354,4 +330,3 @@ body.teachers-site {
     min-height: 118px;
   }
 }
-
