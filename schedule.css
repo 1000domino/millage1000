@@ -1,3 +1,99 @@
+@charset "UTF-8";
+
+:root {
+  --schedule-orange: #ff5a00;
+  --schedule-ink: #3f3f3f;
+  --schedule-gray: #d8d8d8;
+  --schedule-gray-dark: #8d8d8d;
+  --schedule-paper: #f1f1f1;
+  --schedule-white: #fff;
+  --schedule-blue: #91ddff;
+  --schedule-blue-dark: #178bd2;
+  --schedule-yellow: #ffd400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--schedule-ink);
+  font-family: "DotGothic16", "Yu Gothic", monospace;
+  background:
+    radial-gradient(circle, rgba(255, 90, 0, .3) 0 2px, transparent 3px) 0 0 / 24px 24px,
+    var(--schedule-paper);
+}
+
+a {
+  color: #0055cc;
+}
+
+a:visited {
+  color: #7040a0;
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--schedule-orange);
+  background: #fff2e9;
+}
+
+.schedule-page {
+  width: min(760px, calc(100% - 20px));
+  margin: 28px auto 64px;
+}
+
+.schedule-window {
+  background: rgba(255, 255, 255, .97);
+  border: 3px solid var(--schedule-ink);
+  box-shadow: 7px 7px 0 rgba(255, 90, 0, .28);
+}
+
+.schedule-window__bar {
+  min-height: 34px;
+  padding: 5px 8px 5px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--schedule-white);
+  background: var(--schedule-orange);
+  border-bottom: 3px solid var(--schedule-ink);
+  font-family: monospace;
+  font-size: 12px;
+  letter-spacing: .08em;
+}
+
+.schedule-window__controls {
+  letter-spacing: .3em;
+}
+
+.schedule-window__body {
+  padding: 24px 16px 20px;
+  text-align: center;
+}
+
+.schedule-kicker {
+  margin: 0 0 7px;
+  color: var(--schedule-orange);
+  font-family: monospace;
+  font-size: 11px;
+  letter-spacing: .16em;
+}
+
+.schedule-window h1 {
+  margin: 0;
+  font-size: clamp(34px, 12vw, 56px);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: .08em;
+}
+
   transform: translateY(-50%);
   pointer-events: none;
 }
@@ -126,6 +222,3 @@
 
 @media (prefers-reduced-motion: reduce) {
   html {
-    scroll-behavior: auto;
-  }
-}
