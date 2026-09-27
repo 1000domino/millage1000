@@ -401,3 +401,15 @@ body.teachers-site {
     object-position: center;
   }
 }
+
+@media (max-width: 700px) {
+  .teacher-photo img {
+    object-fit: cover;
+    object-position: center 10%;
+  }
+
+  /* 画像が表示できているときは、背後のファイル名を隠す */
+  .teacher-photo:has(img:not([hidden])) .teacher-photo__placeholder {
+    display: none;
+  }
+}
