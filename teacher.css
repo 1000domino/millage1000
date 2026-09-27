@@ -330,3 +330,18 @@ body.teachers-site {
     min-height: 118px;
   }
 }
+
+
+.teachers-page .qa-bottom-nav {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .teachers-page .qa-bottom-nav {
+    gap: 2px;
+    font-size: clamp(7px, 2vw, 10px);
+    overflow-x: auto;
+  }
+}
