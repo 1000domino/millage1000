@@ -331,17 +331,60 @@ body.teachers-site {
   }
 }
 
+/* スマホでも先生2人を横並びに */
+@media (max-width: 700px) {
+  .teacher-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
 
-.teachers-page .qa-bottom-nav {
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  max-width: 100%;
-}
+  .teacher-photo {
+    aspect-ratio: 4 / 3;
+  }
 
-@media (max-width: 600px) {
-  .teachers-page .qa-bottom-nav {
-    gap: 2px;
-    font-size: clamp(7px, 2vw, 10px);
-    overflow-x: auto;
+  .teacher-photo__placeholder {
+    padding: 4px;
+    font-size: 9px;
+    overflow-wrap: anywhere;
+  }
+
+  .teacher-card__bar {
+    padding: 4px;
+    gap: 3px;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+
+  .teacher-card__status {
+    padding-inline: 2px;
+  }
+
+  .teacher-card__body {
+    padding: 10px 8px 12px;
+  }
+
+  .teacher-card__role {
+    font-size: 9px;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .teacher-card h3 {
+    margin-bottom: 8px;
+    font-size: 18px;
+  }
+
+  .teachers-page .profile-table {
+    font-size: 10px;
+  }
+
+  .teachers-page .profile-table th,
+  .teachers-page .profile-table td {
+    padding-inline: 2px;
+    overflow-wrap: anywhere;
+  }
+
+  .teacher-card__copy {
+    font-size: 10px;
   }
 }
