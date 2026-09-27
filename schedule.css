@@ -430,3 +430,10 @@ a:focus-visible {
 .month-card:not(#month-08) h2::before {
   width: 28px;
 }
+
+@media (max-width: 600px) {
+  .month-card:not(#month-08) .month-card__number::after {
+    left: calc(100% - 4px);
+    font-size: 16px;
+  }
+}
