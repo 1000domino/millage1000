@@ -405,7 +405,7 @@ body.teachers-site {
 @media (max-width: 700px) {
   .teacher-photo img {
     object-fit: cover;
-    object-position: center 10%;
+    object-position: center 40%;
   }
 
   /* 画像が表示できているときは、背後のファイル名を隠す */
