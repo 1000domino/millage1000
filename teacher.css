@@ -414,12 +414,34 @@ body.teachers-site {
   }
 }
 
+.teacher-link {
+  text-align: center;
+  margin: 70px 0 40px;
+}
 
+.teacher-link a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #ff5a1f;
+  font-size: 16px;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.teacher-link a::before,
 .teacher-link a::after {
-  content: "→";
-  width: auto;
-  height: auto;
-  background: none;
-  font-size: 14px;
-  opacity: 0.6;
+  content: "";
+  width: 28px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.45;
+}
+
+.teacher-link a:hover {
+  opacity: 0.65;
+  transform: translateY(-2px);
 }
