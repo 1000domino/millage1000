@@ -413,3 +413,13 @@ body.teachers-site {
     display: none;
   }
 }
+
+
+.teacher-link a::after {
+  content: "→";
+  width: auto;
+  height: auto;
+  background: none;
+  font-size: 14px;
+  opacity: 0.6;
+}
