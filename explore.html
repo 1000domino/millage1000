@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>探索｜再び、一千年</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="explore.css">
+</head>
+<body>
+  <main class="explore-wrap">
+    <article class="explore-window" aria-labelledby="place-title">
+      <header class="window-bar">
+        <span class="window-bar__mark" aria-hidden="true">▥</span>
+        <span>EXPLORE / <span id="window-location">UNKNOWN</span></span>
+        <span class="window-bar__controls" aria-hidden="true"><i>─</i><i>×</i></span>
+      </header>
+
+      <div class="explore-content">
+        <section class="place-heading">
+          <div>
+            <p class="place-kicker">SUMMER SCHOOL ARCHIVE</p>
+            <h1 id="place-title">読み込み中……</h1>
+          </div>
+          <div class="pixel-books" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        </section>
+
+        <dl class="place-meta">
+          <div><dt>LOCATION</dt><dd id="place-en">UNKNOWN</dd></div>
+          <div><dt>TIME</dt><dd id="place-time">--:--</dd></div>
+        </dl>
+
+        <figure class="evidence-frame">
+          <img id="place-image" class="place-image" src="" alt="" hidden>
+          <div id="pixel-scene" class="pixel-scene" data-visual="book" aria-hidden="true">
+            <div class="scene-shelves"></div>
+            <div class="scene-object scene-object--primary"></div>
+            <div class="scene-object scene-object--secondary"></div>
+            <span id="artifact-label" class="artifact-label">ARCHIVE</span>
+          </div>
+        </figure>
+
+        <section class="trace-panel">
+          <p id="place-status" class="trace-status">誰かがいた形跡があります。</p>
+          <p id="place-intro" class="trace-copy"></p>
+        </section>
+
+        <button id="inspect-button" class="pixel-button pixel-button--primary" type="button" aria-expanded="false">
+          <span aria-hidden="true">▣</span>
+          <span>もう少し調べる &gt;&gt;</span>
+        </button>
+
+        <section id="detail-panel" class="detail-panel" hidden>
+          <p class="detail-panel__label">FOUND TEXT</p>
+          <p id="place-detail"></p>
+        </section>
+
+        <a class="pixel-button pixel-button--back" href="school.html">
+          <span aria-hidden="true">◀</span>
+          <span>校内見取り図へ戻る</span>
+        </a>
+      </div>
+    </article>
+  </main>
+
+  <script src="explore-data.js"></script>
+  <script src="explore.js"></script>
+</body>
+</html>
