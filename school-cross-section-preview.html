@@ -150,6 +150,19 @@
 
     .info-panel h2 { margin: 0 0 8px; font-size: 25px; font-weight: 500; }
     .info-panel p { margin: 0; line-height: 1.8; font-size: 14px; }
+    .explore-link {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 9px 13px;
+      border: 3px solid var(--orange);
+      color: var(--orange);
+      background: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 4px 4px 0 rgba(255,90,0,.25);
+    }
+    .explore-link:hover, .explore-link:focus-visible { color: #fff; background: var(--orange); }
+    .explore-link[hidden] { display: none; }
 
     @media (max-width: 700px) {
       .page { padding: 20px 10px 34px; }
@@ -436,6 +449,7 @@
         <p class="eyebrow">EXPLORE</p>
         <h2 id="place-title">校舎断面図</h2>
         <p id="place-copy">気になる場所を選択してください。</p>
+        <a id="place-link" class="explore-link" href="#" target="_blank" rel="noopener" hidden>探索する &gt;&gt;</a>
       </aside>
     </section>
   </main>
@@ -462,12 +476,31 @@
 
     const title = document.querySelector("#place-title");
     const copy = document.querySelector("#place-copy");
+    const link = document.querySelector("#place-link");
+
+    // 探索ページを公開する場所だけを指定
+    const explorablePlaces = new Set([
+      "classroom-4",
+      "music-room",
+      "library",
+      "art-room",
+      "broadcast-room",
+      "infirmary"
+    ]);
 
     function showPlace(element) {
       const place = places[element.dataset.place];
       if (!place) return;
       title.textContent = place[0];
       copy.textContent = place[1];
+
+      if (explorablePlaces.has(element.dataset.place)) {
+        link.href = `explore.html?place=${encodeURIComponent(`school-${element.dataset.place}`)}`;
+        link.hidden = false;
+      } else {
+        link.hidden = true;
+        link.removeAttribute("href");
+      }
     }
 
     document.querySelectorAll(".location").forEach((element) => {
